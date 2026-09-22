@@ -1,8 +1,26 @@
+import { ApplicationList } from "@/components/application/application-list";
+import { mockApplications } from "@/data/mock-applications";
+
 const statusCards = [
-  { label: "전체 지원", count: 0 },
-  { label: "진행 중", count: 0 },
-  { label: "면접", count: 0 },
-  { label: "오퍼", count: 0 },
+  {
+    label: "전체 지원",
+    count: mockApplications.length,
+  },
+  {
+    label: "진행 중",
+    count: mockApplications.filter(
+      (item) => item.status === "APPLIED" || item.status === "ASSIGNMENT",
+    ).length,
+  },
+  {
+    label: "면접",
+    count: mockApplications.filter((item) => item.status === "INTERVIEW")
+      .length,
+  },
+  {
+    label: "오퍼",
+    count: mockApplications.filter((item) => item.status === "OFFER").length,
+  },
 ];
 
 export default function Home() {
@@ -22,11 +40,11 @@ export default function Home() {
           </p>
         </div>
 
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {statusCards.map((card) => (
             <div
               key={card.label}
-              className="rounded-lg border border-gray-200 bg-white p-4"
+              className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
             >
               <p className="text-sm text-gray-600">{card.label}</p>
               <p className="mt-2 text-2xl font-semibold text-gray-900">
@@ -34,6 +52,11 @@ export default function Home() {
               </p>
             </div>
           ))}
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-lg font-semibold text-gray-900">지원 목록</h2>
+          <ApplicationList applications={mockApplications} />
         </section>
       </main>
     </div>
