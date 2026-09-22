@@ -1,8 +1,41 @@
+const statusCards = [
+  { label: "전체 지원", count: 0 },
+  { label: "진행 중", count: 0 },
+  { label: "면접", count: 0 },
+  { label: "오퍼", count: 0 },
+];
+
 export default function Home() {
   return (
-    <main>
-      <h1>ApplyFlow</h1>
-      <p>이직 지원 현황을 한곳에서 관리하세요.</p>
-    </main>
+    <div className="min-h-screen bg-gray-50">
+      <header className="border-b border-gray-200 bg-white">
+        <div className="mx-auto flex h-14 max-w-5xl items-center px-4">
+          <span className="text-lg font-semibold text-gray-900">ApplyFlow</span>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-5xl px-4 py-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-semibold text-gray-900">지원 현황</h1>
+          <p className="mt-1 text-sm text-gray-600">
+            최근 지원 현황을 확인해보세요.
+          </p>
+        </div>
+
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {statusCards.map((card) => (
+            <div
+              key={card.label}
+              className="rounded-lg border border-gray-200 bg-white p-4"
+            >
+              <p className="text-sm text-gray-600">{card.label}</p>
+              <p className="mt-2 text-2xl font-semibold text-gray-900">
+                {card.count}
+              </p>
+            </div>
+          ))}
+        </section>
+      </main>
+    </div>
   );
 }
